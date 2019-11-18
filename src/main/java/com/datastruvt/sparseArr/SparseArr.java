@@ -1,10 +1,10 @@
 package com.datastruvt.sparseArr;
 
-import java.io.FileOutputStream;
+import java.io.*;
 
 public class SparseArr {
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException {
         System.out.println("aaa");
 
         int[][] oriArr=new int [11][11];//默认值为0；
@@ -43,16 +43,24 @@ public class SparseArr {
                 }
         }
 
+        FileWriter fw = new FileWriter("D:\\download\\sparseArr.txt");
+        FileReader fr = new FileReader("D:\\download\\sparseArr.txt");
+        BufferedWriter bw = new BufferedWriter(fw);
+        BufferedReader br = new BufferedReader(fr);
         for (int[] row:sparseArr) {
-            for (int i:row) {
-                FileOutputStream fileOutputStream = new FileOutputStream("");
-
-                System.out.printf("%d\t",i);
+            StringBuilder sb=new StringBuilder();
+            for (Integer p:row) {
+                sb.append(p).append(",");
+                System.out.printf("%d\t",p);
 
             }
-            System.out.println("");
+            sb.append("\n");
+            bw.write(sb.toString());
+            bw.flush();
+            System.out.println("成功写入"+sb.toString());
         }
 
+        bw.close();
 
 
     }
