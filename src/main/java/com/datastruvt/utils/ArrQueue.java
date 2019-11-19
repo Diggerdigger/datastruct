@@ -1,12 +1,13 @@
 package com.datastruvt.utils;
 
+//数组模拟环形队列
 public class ArrQueue {
 
-    private Integer maxSize;
+    private static Integer maxSize;
 
-    private Integer front;  //front指向队列的第一个元素
-    private Integer rear;  //rear指向队列最后一个元素的后一个位置
-    private int[] arrQue;
+    private static Integer front;  //front指向队列的第一个元素
+    private static Integer rear;  //rear指向队列最后一个元素的后一个位置
+    private static int[] arrQue;
 
     public ArrQueue(int maxSize){
         this.maxSize=maxSize;
