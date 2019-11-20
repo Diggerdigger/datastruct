@@ -1,13 +1,14 @@
 package com.datastruvt.utils;
 
 public class LinkNode {
-    private static int num;
-    private static String content;
-    private static LinkNode next;
+    private int num;
+    private String content;
+    private LinkNode next;
 
     public LinkNode(int num,String content){
         this.num=num;
         this.content=content;
+
     }
 
     public int getNum() {
