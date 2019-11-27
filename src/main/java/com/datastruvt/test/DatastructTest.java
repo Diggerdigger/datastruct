@@ -4,10 +4,27 @@ import com.datastruvt.utils.ArrQueue;
 import com.datastruvt.utils.LinkNode;
 import com.datastruvt.utils.SingleLinkedList;
 
+import java.util.Stack;
+
 public class DatastructTest {
 
+    private static int [] weights={11,5,9,1,6,10};
+
     public static void main(String[] args){
-        testSingleLinkedList();
+        System.out.println( packageProblem(29,weights.length));
+    }
+
+    public static boolean packageProblem(int s,int n){//背包问题
+        if(s==0) return true;
+        else if((s<0)||(s>0&&n<1)) return false;
+        else{
+            if(packageProblem(s-weights[n-1],n-1)){
+                System.out.println(weights[n-1]);
+                return true;
+            }else{
+                return packageProblem(s,n-1);
+            }
+        }
     }
 
     public static void testSingleLinkedList(){
@@ -34,7 +51,7 @@ public class DatastructTest {
         singleLinkedList1.list();
         singleLinkedList2.addByOrder(node1).addByOrder(node2).addByOrder(node3).addByOrder(node4).addByOrder(node5).addByOrder(node6);
         singleLinkedList2.list();*/
-
+        boolean s="sssssss".matches("//ss");
     }
 
     public static void testDataStruct(){
