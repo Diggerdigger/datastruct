@@ -4,6 +4,11 @@ import com.datastruvt.utils.ArrQueue;
 import com.datastruvt.utils.LinkNode;
 import com.datastruvt.utils.SingleLinkedList;
 
+import java.util.Queue;
+import java.util.Stack;
+import java.util.concurrent.ConcurrentLinkedDeque;
+import java.util.concurrent.ConcurrentLinkedQueue;
+
 public class DatastructTest {
 
     public static void main(String[] args){
@@ -34,6 +39,9 @@ public class DatastructTest {
         singleLinkedList1.list();
         singleLinkedList2.addByOrder(node1).addByOrder(node2).addByOrder(node3).addByOrder(node4).addByOrder(node5).addByOrder(node6);
         singleLinkedList2.list();*/
+
+        ConcurrentLinkedQueue<Integer> queue = new ConcurrentLinkedQueue<Integer>();
+        queue.
 
     }
 
