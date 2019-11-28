@@ -11,7 +11,67 @@ public class DatastructTest {
     private static int [] weights={11,5,9,1,6,10};
 
     public static void main(String[] args){
-        System.out.println( packageProblem(29,weights.length));
+        //System.out.println( packageProblem(29,weights.length));
+        testMaze();
+    }
+
+    public  static  void testMaze(){
+        int[][] maze=new int[10][10];
+        for(int i=0;i<10;i++){
+            maze[0][i]=1;
+            maze[9][i]=1;
+            maze[i][0]=1;
+            maze[i][9]=1;
+        }
+        maze[2][2]=1;
+        maze[4][4]=1;
+        maze[3][3]=1;
+        maze[5][5]=1;
+        maze[6][6]=1;
+        maze[7][7]=1;
+        for(int ii=0;ii<10;ii++){
+            for(int jj=0;jj<10;jj++){
+                System.out.print(maze[ii][jj]);
+                System.out.print(" ");
+            }
+            System.out.println(" ");
+        }
+        System.out.println("================");
+        //boolean re=mazeFind(maze,1,1,8,8);
+        boolean re=mazeFind(maze,1,1);
+        if (re){
+            for(int i=0;i<10;i++){
+                for(int j=0;j<10;j++){
+                    System.out.print(maze[i][j]);
+                    System.out.print(" ");
+                }
+                System.out.println(" ");
+            }
+        }
+    }
+
+    private static boolean mazeFind(int[][] maze, int oriX, int oriY) {
+        if (maze[8][8] == 2) {
+            return true;
+        } else {
+            if (maze[oriX][oriY] == 0) {
+                maze[oriX][oriY] = 2;
+                if (mazeFind(maze, oriX + 1, oriY)) {
+                    return true;
+                } else if (mazeFind(maze, oriX, oriY - 1)) {
+                    return true;
+                } else if (mazeFind(maze, oriX - 1, oriY)) {
+                    return true;
+                } else if (mazeFind(maze, oriX, oriY + 1)) {
+                    return true;
+                } else {
+                    maze[oriX][oriY] = 3;
+                    return false;
+                }
+            } else {
+                return false;
+            }
+        }
     }
 
     public static boolean packageProblem(int s,int n){//背包问题
