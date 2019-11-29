@@ -4,6 +4,10 @@ import com.datastruvt.utils.ArrQueue;
 import com.datastruvt.utils.LinkNode;
 import com.datastruvt.utils.SingleLinkedList;
 
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.HashSet;
 
 
 public class DatastructTest {
@@ -37,8 +41,7 @@ public class DatastructTest {
             System.out.println(" ");
         }
         System.out.println("================");
-        //boolean re=mazeFind(maze,1,1,8,8);
-        boolean re=mazeFind(maze,1,1);
+        /*boolean re=mazeFind(maze,1,1);
         if (re){
             for(int i=0;i<10;i++){
                 for(int j=0;j<10;j++){
@@ -47,22 +50,82 @@ public class DatastructTest {
                 }
                 System.out.println(" ");
             }
+        }*/
+        mazeRs re=mazeFind2(maze,1,1);
+        if (re.getRs()){
+            for(int i=0;i<10;i++){
+                for(int j=0;j<10;j++){
+                    System.out.print(maze[i][j]);
+                    System.out.print(" ");
+                }
+                System.out.println(" ");
+                }
+        }
+    }
+
+
+    private static mazeRs mazeFind2(int[][] maze, int oriX, int oriY) {
+        System.out.println(oriX+":"+oriY);
+        if (maze[8][8] == 2) {
+            mazeRs rs = new mazeRs();
+            rs.setLengths(0);
+            rs.setRs(true);
+            return rs;
+        } else {
+            if (maze[oriX][oriY] == 0) {
+                maze[oriX][oriY] = 2;
+
+                ArrayList<mazeRs> sortList = new ArrayList<>();
+                mazeRs a=mazeFind2(maze, oriX + 1, oriY);
+                if(a.getRs()){
+                    sortList.add(a);
+                }
+                mazeRs b=mazeFind2(maze, oriX , oriY+1);
+                if(a.getRs()){
+                    sortList.add(b);
+                }
+                mazeRs c=mazeFind2(maze, oriX - 1, oriY);
+                if(a.getRs()){
+                    sortList.add(c);
+                }
+                mazeRs d=mazeFind2(maze, oriX , oriY-1);
+                if(a.getRs()){
+                    sortList.add(d);
+                }
+                Collections.sort(sortList);
+                if(sortList.size()>0){
+                    mazeRs rs = sortList.get(0);
+                    rs.setLengths(rs.getLengths()+1);
+                    return rs;
+                }else{
+                    maze[oriX][oriY] = 3;
+                    mazeRs rs = new mazeRs();
+                    rs.setRs(false);
+                    return rs;
+                }
+
+
+            } else {
+                mazeRs rs = new mazeRs();
+                rs.setRs(false);
+                return rs;
+            }
         }
     }
 
     private static boolean mazeFind(int[][] maze, int oriX, int oriY) {
-        if (maze[8][8] == 2) {
-            return true;
+        if (maze[6][5] == 2) {
+           return true;
         } else {
             if (maze[oriX][oriY] == 0) {
                 maze[oriX][oriY] = 2;
-                if (mazeFind(maze, oriX + 1, oriY)) {
+                if (mazeFind(maze, oriX + 1, oriY)) {   //down
                     return true;
-                } else if (mazeFind(maze, oriX, oriY - 1)) {
+                } else if (mazeFind(maze, oriX, oriY - 1)) {  //left
                     return true;
-                } else if (mazeFind(maze, oriX - 1, oriY)) {
+                } else if (mazeFind(maze, oriX, oriY+1)) {//right
                     return true;
-                } else if (mazeFind(maze, oriX, oriY + 1)) {
+                } else if (mazeFind(maze, oriX-1, oriY )) {//up
                     return true;
                 } else {
                     maze[oriX][oriY] = 3;
