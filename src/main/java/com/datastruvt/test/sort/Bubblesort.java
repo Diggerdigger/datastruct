@@ -13,7 +13,7 @@ public class Bubblesort {
     private static int temp;
 
     public static void main(String[] args) {
-        int [] ori=new int[10000];
+        int [] ori=new int[50000000];
         for(int p=0;p<ori.length;p++){
             ori[p]= (int)(Math.random()*ori.length);
         }
@@ -21,41 +21,66 @@ public class Bubblesort {
         int[] clone = ori.clone();
         int[] insertArg = clone.clone();
         int[] quickArg = insertArg.clone();
-
-        printargs(ori);
+        int[] shellArg = quickArg.clone();
+        /*
+        //printargs(ori);
         long a = System.currentTimeMillis();
         bubbleSort(ori);
         long b = System.currentTimeMillis();
         System.out.println("&&&&&&&&&&&&&&&&&&&&&");
-        printargs(ori);
+        //printargs(ori);
         System.out.println("冒泡:"+(b-a));
         System.out.println("=====================");
 
-        printargs(clone);
+        //printargs(clone);
         long c = System.currentTimeMillis();
         selectSort(clone);
         long d = System.currentTimeMillis();
         System.out.println("&&&&&&&&&&&&&&&&&&&&&");
-        printargs(clone);
+        //printargs(clone);
         System.out.println("选择:"+(d-c));
 
-        printargs(insertArg);
+        //printargs(insertArg);
         long e = System.currentTimeMillis();
         insertSort(insertArg);
         long f = System.currentTimeMillis();
         System.out.println("&&&&&&&&&&&&&&&&&&&&&");
-        printargs(insertArg);
+        //printargs(insertArg);
         System.out.println("插入:"+(f-e));
+        */
+        //printargs(shellArg);
+        long j = System.currentTimeMillis();
+        shellSort(shellArg);
+        long k = System.currentTimeMillis();
+        System.out.println("&&&&&&&&&&&&&&&&&&&&&");
+        //printargs(shellArg);
+        System.out.println("希尔:"+(k-j));
 
-        printargs(quickArg);
+        //printargs(quickArg);
         long g = System.currentTimeMillis();
         selectSort(quickArg,0,quickArg.length-1);
         long h = System.currentTimeMillis();
         System.out.println("&&&&&&&&&&&&&&&&&&&&&");
-        printargs(insertArg);
+       // printargs(quickArg);
         System.out.println("快速:"+(h-g));
     }
 
+    private static void shellSort(int[] ori) {
+        for (int gap = ori.length / 2; gap >= 1; gap /= 2) {
+            for(int j=gap;j<ori.length;j++){
+                if (ori[j - gap] > ori[j]) {
+                    int tem = ori[j];
+                    int p = j - gap;
+                    while (p >= 0 && ori[p] > tem) {
+                        ori[p + gap] = ori[p];
+                        p -= gap;
+                    }
+                    ori[p + gap] = tem;
+                }
+            }
+        }
+
+    }
 
 
     private static void insertSort(int[] insertArg) {
